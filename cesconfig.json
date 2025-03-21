@@ -1,9 +1,16 @@
 {
   "cesVersion": "2.14.1",
-  "projectName": "my-expo-app",
+  "projectName": "routagII",
   "packages": [
     {
-      "name": "nativewind",
+      "name": "expo-router",
+      "type": "navigation",
+      "options": {
+        "type": "tabs"
+      }
+    },
+    {
+      "name": "stylesheet",
       "type": "styling"
     }
   ],
@@ -13,7 +20,7 @@
     "overwrite": false,
     "importAlias": true,
     "packageManager": "npm",
-    "eas": false,
+    "eas": true,
     "publish": false
   },
   "packageManager": {
