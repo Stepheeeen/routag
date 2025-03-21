@@ -4,19 +4,18 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import React from 'react';
 import tw from 'twrnc';
 import CustomButton from '~/components/Button';
-import { router } from 'expo-router';
 
 export default function Onboarding() {
-  const handlePress = (page: any) => {
-    router.push(page)
+  const handlePress = (button: string) => {
+    console.log(`${button} button pressed`);
   };
 
   const pages = [
     {
-      image: require('../assets/onboarding/image1.png'),
+      image: require('../../assets/onboarding/image2.png'),
       buttons: [
-        { label: 'Carrier', variant: 'black', path: "/carrier" },
-        { label: 'Customer', variant: 'outline', path: "/customer" },
+        { label: 'Login', variant: 'solid' },
+        { label: 'Create Account', variant: 'outline' },
       ],
     },
   ];
@@ -44,7 +43,7 @@ export default function Onboarding() {
                 key={i}
                 label={btn.label}
                 variant={btn.variant as any}
-                onPress={() => handlePress(btn.path)}
+                onPress={() => handlePress(btn.label)}
               />
             ))}
           </View>
