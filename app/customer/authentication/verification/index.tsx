@@ -1,14 +1,38 @@
-// screens/VerificationScreen.tsx
 import { View, Text, TouchableOpacity } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import tw from 'twrnc';
 import OTPInput from '~/components/OTPInput';
 import LayoutPage from '~/layout/PageLayout';
 import CustomButton from '~/components/Button';
 import { router } from 'expo-router';
 
-export default function VerificationScreen({ navigation }: any) {
+export default function VerificationScreen() {
     const [code, setCode] = useState(['', '', '', '']);
+    const [timer, setTimer] = useState(120); // 2 minutes
+
+    useEffect(() => {
+        if (timer === 0) return;
+
+        const interval = setInterval(() => {
+            setTimer((prev) => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [timer]);
+
+    const formatTime = (seconds: number) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
+
+    const handleResend = () => {
+        if (timer === 0) {
+            // trigger resend API here
+            console.log("Resend code");
+            setTimer(120); // reset timer
+        }
+    };
 
     return (
         <LayoutPage>
@@ -25,11 +49,17 @@ export default function VerificationScreen({ navigation }: any) {
                     }} />
                 </View>
 
-                <Text style={tw`text-center text-gray-500 mb-4`}>02:39</Text>
-
                 <CustomButton label='Submit' onPress={() => router.push("/")} variant='solid' />
-                <Text style={tw`text-center`}>
-                    Didn’t receive the code? <Text style={tw`text-orange-500 font-semibold`}>Resend</Text>
+
+                <Text style={tw`text-center mt-4`}>
+                    Didn’t receive the code?{" "}
+                    {timer > 0 ? (
+                        <Text style={tw`text-gray-500`}>{formatTime(timer)}</Text>
+                    ) : (
+                        <TouchableOpacity onPress={handleResend}>
+                            <Text style={tw`text-orange-500 font-semibold`}>Resend</Text>
+                        </TouchableOpacity>
+                    )}
                 </Text>
             </View>
         </LayoutPage>
