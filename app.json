@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "routagII",
-    "slug": "routagII",
+    "name": "routag",
+    "slug": "routag",
     "version": "1.0.0",
-    "scheme": "routagII",
+    "scheme": "routag",
     "web": {
       "bundler": "metro",
       "output": "static",

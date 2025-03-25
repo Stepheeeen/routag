@@ -22,12 +22,12 @@ export default function Onboarding() {
   ];
 
   return (
-    <SafeAreaView style={tw`flex-1 w-full`}>
+    <SafeAreaView style={tw`h-[100vh] w-full`}>
       {pages.map((page, index) => (
         <View key={index} style={tw`h-full justify-end pb-10 bg-white`}>
           <Image
             source={page.image}
-            style={tw`w-full h-[75%]`}
+            style={tw`w-full h-[79%]`}
             resizeMode="cover"
           />
 
