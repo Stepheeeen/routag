@@ -10,14 +10,15 @@ type Props = {
   icon: keyof typeof Feather.glyphMap;
   secureTextEntry?: boolean;
   value: string;
+  background?: string;
   onChangeText: (text: string) => void;
 };
 
-export default function InputField({ label, placeholder, icon, secureTextEntry = false, value, onChangeText }: Props) {
+export default function InputField({ label, placeholder, icon, secureTextEntry = false, value, onChangeText, background }: Props) {
   return (
     <View style={tw`mb-5`}>
       <Text style={tw`text-base font-semibold text-gray-700 mb-1`}>{label}</Text>
-      <View style={tw`flex-row items-center border border-gray-300 rounded-xl px-4 py-3`}>
+      <View style={tw`flex-row items-center border border-gray-300 rounded-xl px-4 py-3 ${background || `bg-white`}`}>
         <Feather name={icon} size={20} color="#999" />
         <TextInput
           style={tw`ml-2 flex-1 text-base`}

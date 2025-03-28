@@ -22,7 +22,7 @@ export default function SignInScreen() {
           <InputField label="Password" placeholder="******" icon="lock" value={password} onChangeText={setPassword} secureTextEntry />
         </View>
 
-        <CustomButton label='Login' onPress={() => router.push("/")} variant='solid' />
+        <CustomButton label='Login' onPress={() => router.push("/customer/dashboard/page")} variant='solid' />
       </View>
     </LayoutPage>
   );

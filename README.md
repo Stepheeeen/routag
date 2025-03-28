@@ -1,1 +1,1 @@
-Refactor app configuration and implement verification screen with OTP input and resend functionality
+Refactor app configuration and implement verification screen with OTP input and resend functionality 
