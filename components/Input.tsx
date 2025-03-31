@@ -5,13 +5,13 @@ import tw from 'twrnc';
 import { Feather } from '@expo/vector-icons';
 
 type Props = {
-  label: string;
+  label?: string;
   placeholder: string;
   icon: keyof typeof Feather.glyphMap;
   secureTextEntry?: boolean;
-  value: string;
+  value?: string;
   background?: string;
-  onChangeText: (text: string) => void;
+  onChangeText?: (text: string) => void;
 };
 
 export default function InputField({ label, placeholder, icon, secureTextEntry = false, value, onChangeText, background }: Props) {

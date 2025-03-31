@@ -5,6 +5,7 @@ import { Ionicons, Feather } from '@expo/vector-icons';
 import InputField from '~/components/Input';
 import CustomButton from '~/components/Button';
 import Dashboard from '~/layout/DashboardLayout';
+import { router } from 'expo-router';
 
 type FeatureItemProps = {
     title: string;
@@ -25,7 +26,7 @@ const DashboardScreen: React.FC = () => {
                 <>
                     <View style={tw`flex-row justify-between items-center mb-4`}>
                         <Text style={tw`text-white text-lg font-bold`}>ROUTAG</Text>
-                        <TouchableOpacity style={tw`relative`}>
+                        <TouchableOpacity style={tw`relative`} onPress={() => router.push("/customer/notification")}>
                             <Ionicons name="notifications-outline" size={24} color="white" />
                             <View style={tw`absolute top-0 right-0 bg-red-500 h-2 w-2 rounded-full`} />
                         </TouchableOpacity>

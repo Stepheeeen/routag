@@ -7,9 +7,10 @@ import { router } from 'expo-router';
 interface LayoutPageProps {
     pageLabel?: string;
     children: ReactNode;
+    classname?: any
 }
 
-const LayoutPage: React.FC<LayoutPageProps> = ({ pageLabel, children }) => {
+const LayoutPage: React.FC<LayoutPageProps> = ({ pageLabel, children, classname }) => {
 
     return (
         <View style={tw`flex-1 bg-white`}>
@@ -32,7 +33,7 @@ const LayoutPage: React.FC<LayoutPageProps> = ({ pageLabel, children }) => {
             </View>
 
             {/* Body */}
-            <View style={tw`flex-1`}>
+            <View style={tw`flex-1 ${classname}`}>
                 {children}
             </View>
         </View>
