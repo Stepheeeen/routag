@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import tw from 'twrnc';
 import { router } from 'expo-router';
@@ -13,14 +13,14 @@ interface LayoutPageProps {
 const LayoutPage: React.FC<LayoutPageProps> = ({ pageLabel, children, classname }) => {
 
     return (
-        <View style={tw`flex-1 bg-white`}>
+        <View style={tw`flex-1 bg-[#F3F3F4]`}>
             {/* Header with Back Button */}
             <View style={tw`flex-row items-center justify-between px-4 pt-4`}>
                 <TouchableOpacity
                     onPress={() => router.back()}
-                    style={tw`w-10 h-10 rounded-full border border-gray-300 items-center justify-center`}
+                    style={tw`w-10 h-10 rounded-full border border-gray-300 bg-white items-center justify-center`}
                 >
-                    <Ionicons name="arrow-back" size={20} color="black" />
+                    <Ionicons name="chevron-back" size={20} color="#FF6400" />
                 </TouchableOpacity>
 
                 {pageLabel && (
@@ -33,9 +33,9 @@ const LayoutPage: React.FC<LayoutPageProps> = ({ pageLabel, children, classname 
             </View>
 
             {/* Body */}
-            <View style={tw`flex-1 ${classname}`}>
+            <ScrollView style={tw`flex-1 ${classname}`} overScrollMode='never'>
                 {children}
-            </View>
+            </ScrollView>
         </View>
     );
 };

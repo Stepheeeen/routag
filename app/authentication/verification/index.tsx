@@ -7,7 +7,7 @@ import CustomButton from '~/components/Button';
 import { router } from 'expo-router';
 
 export default function VerificationScreen() {
-    const [code, setCode] = useState(['', '', '', '']);
+    const [code, setCode] = useState(['', '', '', '', '']);
     const [timer, setTimer] = useState(120); // 2 minutes
 
     useEffect(() => {
@@ -37,30 +37,32 @@ export default function VerificationScreen() {
     return (
         <LayoutPage>
             <View style={tw`p-6`}>
-                <Text style={tw`text-xl font-bold mb-2`}>Verification Code</Text>
+                <Text style={tw`text-xl font-bold mb-2`}>OTP Verification</Text>
                 <Text style={tw`text-gray-500 mb-5`}>
-                    We have sent the code verification to your email <Text style={tw`font-bold`}>example@you.com</Text>
+                    OTP as been sent to <Text style={tw`font-bold`}>Damilare@gmail.com</Text>
                 </Text>
 
-                <View style={tw`w-10/12 mx-auto my-5`}>
+                <View style={tw`w-11/12 mx-auto my-5`}>
+                <Text style={tw`mb-4 text-[#100F0D]`}>Enter Code</Text>
                     <OTPInput code={code} setCode={setCode} onComplete={(value) => {
                         console.log("Code entered:", value);
                         // call your verify API here
                     }} />
+                    <Text style={tw`mb-4`}>
+                        Didn’t receive the code?{" "}
+                        {timer > 0 ? (
+                            <Text style={tw`text-gray-500`}>{formatTime(timer)}</Text>
+                        ) : (
+                            <TouchableOpacity onPress={handleResend}>
+                                <Text style={tw`text-orange-500`}>Resend</Text>
+                            </TouchableOpacity>
+                        )}
+                    </Text>
                 </View>
 
-                <CustomButton label='Submit' onPress={() => router.push("/")} variant='solid' />
 
-                <Text style={tw`text-center mt-4`}>
-                    Didn’t receive the code?{" "}
-                    {timer > 0 ? (
-                        <Text style={tw`text-gray-500`}>{formatTime(timer)}</Text>
-                    ) : (
-                        <TouchableOpacity onPress={handleResend}>
-                            <Text style={tw`text-orange-500 font-semibold`}>Resend</Text>
-                        </TouchableOpacity>
-                    )}
-                </Text>
+                <CustomButton label='Verify' onPress={() => router.push("/")} variant='solid' />
+
             </View>
         </LayoutPage>
     );

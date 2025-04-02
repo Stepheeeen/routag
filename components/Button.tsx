@@ -5,23 +5,26 @@ import tw from 'twrnc';
 
 type Props = {
   label: string;
-  variant?: 'solid' | 'outline' | 'black';
+  variant?: 'solid' | 'outline' | 'black' | 'white';
   onPress: () => void;
+  icon?: any
+  width?: 'w-full' | 'w-[50%]' | 'w-[45%]' | 'w-[40%]' | 'w-[30%]' | 'w-[20%]'; 
 };
 
-export default function CustomButton({ label, variant , onPress }: Props) {
-  const baseStyles = 'w-full py-4 rounded-full items-center justify-center mb-3';
-  const solidStyles = 'bg-orange-500';
-  const blackStyles = 'bg-black'
+export default function CustomButton({ label, variant, onPress, icon, width = 'w-full' }: Props) {
+  const baseStyles = 'py-4 rounded-[15px] items-center justify-center mb-3';
+  const customWhite = 'bg-white';
+  const solidStyles = 'bg-[#FF6400]';
+  const blackStyles = 'bg-[#100F0D]'
   const outlineStyles = 'border border-gray-800';
 
-  const buttonStyle = tw`${baseStyles} ${
-    variant === 'solid' ? solidStyles : variant === 'black' ? blackStyles : outlineStyles
-  }`;
-  const textStyle = tw`text-base font-semibold ${variant === 'solid' || variant === 'black' ? 'text-white' : 'text-black'}`;
+  const buttonStyle = tw`${baseStyles} ${variant === 'solid' ? solidStyles : variant === 'black' ? blackStyles : variant === 'white' ? customWhite : outlineStyles
+    } ${width} flex-row gap-x-2`;
+  const textStyle = tw`text-base font-semibold ${variant === 'solid' || variant === 'black' ? 'text-white' : variant === 'white' ? 'text-[#FF6400]' : 'text-black'}`;
 
   return (
-    <TouchableOpacity onPress={onPress} style={[buttonStyle, {cursor: "pointer"}]}>
+    <TouchableOpacity onPress={onPress} style={[buttonStyle, { cursor: "pointer" }]}>
+      {icon}
       <Text style={textStyle}>{label}</Text>
     </TouchableOpacity>
   );

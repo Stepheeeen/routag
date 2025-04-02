@@ -55,7 +55,7 @@ export default function OTPInput({ code, setCode, onComplete }: OTPInputProps) {
   }, [code]);
 
   return (
-    <View style={tw`flex-row justify-between mb-4`}>
+    <View style={tw`flex-row justify-between items-center w-full mb-4`}>
       {code.map((digit, idx) => (
         <TextInput
           key={idx}
@@ -67,7 +67,7 @@ export default function OTPInput({ code, setCode, onComplete }: OTPInputProps) {
           keyboardType="number-pad"
           returnKeyType="done"
           editable={!loading}
-          style={tw`w-12 h-12 border border-gray-300 rounded-xl text-xl text-center`}
+          style={tw`w-13 h-13 bg-[#FFDCD7] rounded-xl text-xl text-center`}
         />
       ))}
       {loading && (

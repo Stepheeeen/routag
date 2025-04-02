@@ -1,55 +1,35 @@
 // screens/Onboarding.tsx
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React from 'react';
+import React, { useState } from 'react';
 import tw from 'twrnc';
 import CustomButton from '~/components/Button';
 import { router } from 'expo-router';
 
 export default function Onboarding() {
-  const handlePress = (page: any) => {
-    router.push(page)
-  };
-
-  const pages = [
-    {
-      image: require('../assets/onboarding/image1.png'),
-      buttons: [
-        { label: 'Carrier', variant: 'black', path: "/carrier" },
-        { label: 'Customer', variant: 'outline', path: "/customer" },
-      ],
-    },
-  ];
+  const [step, setStep] = useState(0);
 
   return (
-<SafeAreaView style={tw`h-[100vh] w-full`}>
-      {pages.map((page, index) => (
-        <View key={index} style={tw`h-full justify-end pb-10 bg-white`}>
-          <Image
-            source={page.image}
-            style={tw`w-full h-[79%]`}
-            resizeMode="cover"
-          />
-
-          <View style={tw`px-6 mt-5`}>
-            <Text style={tw`text-xl font-bold mb-2 text-center`}>
-              Routag your cargo right now!
-            </Text>
-            <Text style={tw`text-gray-500 text-center mb-6`}>
-              Our delivery will ensure your items are delivered right to the door steps
-            </Text>
-
-            {page.buttons.map((btn, i) => (
-              <CustomButton
-                key={i}
-                label={btn.label}
-                variant={btn.variant as any}
-                onPress={() => handlePress(btn.path)}
-              />
-            ))}
+    <SafeAreaView style={tw`w-full h-full items-center justify-center`}>
+      {step === 0 && (
+        <View style={tw`relative w-full h-full items-center justify-end`}>
+          <Image source={require('assets/svgs/onboardingStep1.png')} alt='image' style={tw`absolute`} />
+          <View style={tw`w-full items-center p-4`}>
+            <Text style={tw`text-white my-5 text-center font-[500] text-[16px]`}>Your packages delivered by everyday people and trusted businesses — faster, cheaper, and safer.</Text>
+            <CustomButton label="Next" onPress={() => setStep(1)} variant='white' />
           </View>
-        </View>
-      ))}
+        </View >
+      )}
+
+      {step === 1 && (
+        <View style={tw`relative w-full h-full items-center justify-end`}>
+          <Image source={require('assets/svgs/onboardingStep2.png')} alt='image' style={tw`absolute`} />
+          <View style={tw`w-full items-center p-4`}>
+            <Text style={tw`text-[#FF6400] my-5 font-[500] text-[16px]`}>At routtag the security of your package is our priority</Text>
+            <CustomButton label="Continue" onPress={() => router.push("/authentication/login")} variant='solid' />
+          </View>
+        </View >
+      )}
     </SafeAreaView>
   );
 }
