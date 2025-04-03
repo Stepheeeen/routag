@@ -42,6 +42,15 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FF6400"
+      },
+      "package": "com.anonymous.routagII"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "5f2d1df0-fd50-428b-a7cf-9f13912497a3"
       }
     }
   }
