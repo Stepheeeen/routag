@@ -24,14 +24,14 @@ export default function InputField({ label, placeholder, icon, secureTextEntry =
   return (
     <View style={tw`mb-5`}>
       {label && (
-        <Text style={tw`text-[#100F0D] text-[17px] font-semibold mb-2`}>
+        <Text style={tw`text-[#100F0D] text-[16px] font-medium mb-2`}>
           {label}
         </Text>
       )}
-      <View style={tw`flex-row items-center rounded-xl px-4 py-5 ${background || `bg-white`}`}>
+      <View style={tw`flex-row items-center rounded-xl px-4 py-3 ${background || `bg-white`}`}>
         {icon && <Feather name={icon} size={20} color="#999" />}
         <TextInput
-          style={tw`ml-2 flex-1 text-[17px]`}
+          style={tw`ml-2 flex-1 mb-2 text-[17px]`}
           placeholder={placeholder}
           placeholderTextColor={"#9E9392"}
           secureTextEntry={!isPasswordVisible}
