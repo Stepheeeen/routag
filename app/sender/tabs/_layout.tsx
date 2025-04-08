@@ -1,7 +1,6 @@
 import React from "react";
 import { Tabs, usePathname, router } from "expo-router";
 import { Text, TouchableOpacity, View } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Feather from '@expo/vector-icons/Feather';
 import AntDesign from '@expo/vector-icons/AntDesign';

@@ -14,7 +14,7 @@ import FullPageModalLayout from '~/layout/FullPageModalLayout';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Drivers, Vehicles } from '~/db/register';
 
-const SelectionCard = ({ title, description, icon, handleClick }: { title: string; description: string; icon: any; handleClick: () => void }) => {
+export const SelectionCard = ({ title, description, icon, handleClick }: { title: string; description: string; icon: any; handleClick: () => void }) => {
   return (
     <TouchableOpacity style={tw`bg-white rounded-xl mb-4 p-4 flex-row justify-between items-center shadow-sm`} onPress={handleClick}>
       <View style={tw`flex-1`}>

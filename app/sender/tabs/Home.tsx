@@ -4,6 +4,7 @@ import tw from "twrnc";
 import { Ionicons, MaterialIcons, Feather, Entypo } from "@expo/vector-icons";
 import CustomButton from "~/components/Button";
 import Map from "~/components/Map";
+import LayoutPage from "~/layout/PageLayout";
 
 const LocationCard = () => {
   return (
@@ -51,7 +52,7 @@ const LocationCard = () => {
         ))}
       </ScrollView>
 
-      <CustomButton label="Send package" onPress={()=>{}} variant="solid"/>
+      <CustomButton label="Send package" onPress={() => { }} variant="solid" />
     </View>
   );
 };
@@ -62,34 +63,22 @@ const MapScreen = () => {
     { latitude: 6.5300, longitude: 3.3750, title: "Marker 2", description: "Somewhere else" },
   ];
   return (
-    <View style={tw`flex-1 bg-white`}>
-      {/* Map Placeholder */}
-      <Map markers={markers} />
+    <LayoutPage noscroll={true}>
+      {/* <View style={tw`flex-1 bg-white`}> */}
+        {/* Map Placeholder */}
+        <Map markers={markers} />
 
-      {/* Top Left Menu FAB */}
-      <TouchableOpacity
-        style={tw`absolute top-14 left-5 bg-white p-3 rounded-full shadow-lg z-10`}
-      >
-        <Feather name="menu" size={20} color="#FF6400" />
-      </TouchableOpacity>
+        {/* Top Left Menu FAB */}
+        <TouchableOpacity
+          style={tw`absolute top-14 left-5 bg-white p-3 rounded-full shadow-lg z-10`}
+        >
+          <Feather name="menu" size={20} color="#FF6400" />
+        </TouchableOpacity>
 
-      {/* Top Center Location FAB */}
-      {/* <TouchableOpacity
-        style={tw`absolute top-14 self-center bg-orange-500 p-4 rounded-full shadow-lg z-10`}
-      >
-        <Feather name="navigation" size={20} color="white" />
-      </TouchableOpacity> */}
-
-      {/* Bottom Right FAB */}
-      {/* <TouchableOpacity
-        style={tw`absolute bottom-[180px] right-5 bg-white p-3 rounded-full shadow-md z-10`}
-      >
-        <Feather name="navigation" size={18} color="black" />
-      </TouchableOpacity> */}
-
-      {/* Bottom Card */}
-      <LocationCard />
-    </View>
+        {/* Bottom Card */}
+        <LocationCard />
+      {/* </View> */}
+    </LayoutPage>
   );
 };
 
