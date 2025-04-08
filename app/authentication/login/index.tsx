@@ -31,7 +31,7 @@ export default function SignInScreen() {
 
         <View style={tw`flex-row w-full justify-evenly`}>
           <CustomButton label='Face ID' onPress={() => {}} variant='black' icon={<FaceIDIcon />} width='w-[45%]' />
-          <CustomButton label='Login' onPress={() => router.push("/")} variant='solid' width='w-[45%]' />
+          <CustomButton label='Login' onPress={() => router.push("/sender/tabs/Home")} variant='solid' width='w-[45%]' />
         </View>
 
         <View style={tw`flex-row justify-center my-5`}>
