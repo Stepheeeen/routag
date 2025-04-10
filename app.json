@@ -36,7 +36,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.routagII"
+      "bundleIdentifier": "com.anonymous.routagII",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -52,6 +55,7 @@
       "eas": {
         "projectId": "5f2d1df0-fd50-428b-a7cf-9f13912497a3"
       }
-    }
+    },
+    "owner": "vastracktech"
   }
 }
