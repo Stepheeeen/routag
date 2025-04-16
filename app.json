@@ -39,6 +39,9 @@
       "bundleIdentifier": "com.anonymous.routagII",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
+      },
+      "config": {
+        "googleMapsApiKey": "AIzaSyDsEqI39bCnntwJ1IsJaiNXMdhVLpOTKgc"
       }
     },
     "android": {

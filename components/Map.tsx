@@ -1,7 +1,7 @@
 // components/Map.tsx
 import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator, StyleSheet, Dimensions } from 'react-native';
-import MapView, { Marker, Region } from 'react-native-maps';
+import { View, ActivityIndicator, StyleSheet, Dimensions, Text } from 'react-native';
+import MapView, { Marker, Region, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 interface MarkerData {
@@ -43,7 +43,9 @@ const Map = ({ showUserLocation = true, initialRegion, markers = [] }: MapProps)
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#4FC48B" />
+        <Text>
+          <ActivityIndicator size="large" color="#4FC48B" />
+        </Text>
       </View>
     );
   }
@@ -51,8 +53,8 @@ const Map = ({ showUserLocation = true, initialRegion, markers = [] }: MapProps)
   return (
     <MapView
       style={styles.map}
+      provider={PROVIDER_GOOGLE} // Use Google Maps
       showsUserLocation={showUserLocation}
-      showsMyLocationButton={true}
       region={region!}
     >
       {markers.map((marker, index) => (
