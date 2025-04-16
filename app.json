@@ -44,7 +44,12 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#FF6400"
+        "backgroundColor": "#FF6400",
+        "config": {
+          "googleMaps": {
+            "apiKey": "AIzaSyDsEqI39bCnntwJ1IsJaiNXMdhVLpOTKgc"
+          }
+        }
       },
       "package": "com.anonymous.routagII"
     },
