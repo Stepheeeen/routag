@@ -32,8 +32,8 @@ const Map = ({ showUserLocation = true, initialRegion, markers = [] }: MapProps)
         setRegion({
           latitude,
           longitude,
-          latitudeDelta: 0.05,
-          longitudeDelta: 0.05,
+          latitudeDelta: 0.005,
+          longitudeDelta: 0.005,
         });
         setLoading(false);
       })();
@@ -53,7 +53,7 @@ const Map = ({ showUserLocation = true, initialRegion, markers = [] }: MapProps)
   return (
     <MapView
       style={styles.map}
-      provider={PROVIDER_GOOGLE} // Use Google Maps
+      // provider={PROVIDER_GOOGLE}
       showsUserLocation={showUserLocation}
       region={region!}
     >
