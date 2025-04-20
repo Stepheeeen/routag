@@ -7,10 +7,51 @@ import { Link, router } from 'expo-router';
 import CustomButton from '~/components/Button';
 import LayoutPage from '~/layout/PageLayout';
 import { AppleLogo, Facebook, FaceIDIcon, GoogleLogo, RouttagLogo } from '~/assets/svgs';
+import { postRequest } from '~/api/requests/postRequest';
+import Toast from '~/components/Toast';
 
 export default function SignInScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState<'success' | 'error'>('success')
+  const [toastMessage, setToastMessage] = useState('')
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    if (!email || !password) {
+      setToastType('error');
+      setToastMessage("Please fill all required fields");
+      setShowToast(true);
+
+      // Reset toast state after a delay
+      setTimeout(() => setShowToast(false), 3000);
+    } else {
+      setLoading(true);
+      try {
+        const response = await postRequest.login(email, password);
+        console.log(response.data);
+
+        setToastType('success');
+        setToastMessage(response.data.message);
+        setShowToast(true);
+
+        // Reset toast state after a delay
+        setTimeout(() => setShowToast(false), 3000);
+
+        router.push("/sender/tabs/Home")
+      } catch (error: any) {
+        setToastType('error');
+        setToastMessage(error.response?.data?.message || "An error occurred");
+        setShowToast(true);
+
+        // Reset toast state after a delay
+        setTimeout(() => setShowToast(false), 3000);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   return (
     <LayoutPage pageLabel=''>
@@ -30,8 +71,8 @@ export default function SignInScreen() {
         </View>
 
         <View style={tw`flex-row w-full justify-evenly`}>
-          <CustomButton label='Face ID' onPress={() => {}} variant='black' icon={<FaceIDIcon />} width='w-[45%]' />
-          <CustomButton label='Login' onPress={() => router.push("/sender/tabs/Home")} variant='solid' width='w-[45%]' />
+          <CustomButton label='Face ID' onPress={() => { }} variant='black' icon={<FaceIDIcon />} width='w-[45%]' />
+          <CustomButton label='Login' onPress={() => handleLogin()} variant='solid' width='w-[45%]' loading={loading} />
         </View>
 
         <View style={tw`flex-row justify-center my-5`}>
@@ -41,10 +82,18 @@ export default function SignInScreen() {
           </Link>
         </View>
 
-        <CustomButton label='Continue with Apple' onPress={() => {}} variant='outline' icon={<AppleLogo />} />
-        <CustomButton label='Continue with Google' onPress={() => {}} variant='outline' icon={<GoogleLogo />} />
-        <CustomButton label='Continue with Facebook' onPress={() => {}} variant='outline' icon={<Facebook />} />
+        <CustomButton label='Continue with Apple' onPress={() => { }} variant='outline' icon={<AppleLogo />} />
+        <CustomButton label='Continue with Google' onPress={() => { }} variant='outline' icon={<GoogleLogo />} />
+        <CustomButton label='Continue with Facebook' onPress={() => { }} variant='outline' icon={<Facebook />} />
       </View>
+
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          type={toastType}
+          duration={3000}
+        />
+      )}
     </LayoutPage>
   );
 }

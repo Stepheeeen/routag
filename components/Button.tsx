@@ -1,17 +1,18 @@
 // components/CustomButton.tsx
-import { Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import tw from 'twrnc';
 
 type Props = {
   label: string;
   variant?: 'solid' | 'outline' | 'black' | 'white';
-  onPress: () => void;
+  onPress: any;
   icon?: any
-  width?: 'w-full' | 'w-[50%]' | 'w-[45%]' | 'w-[40%]' | 'w-[30%]' | 'w-[20%]'; 
+  width?: 'w-full' | 'w-[50%]' | 'w-[45%]' | 'w-[40%]' | 'w-[30%]' | 'w-[20%]';
+  loading?: boolean;
 };
 
-export default function CustomButton({ label, variant, onPress, icon, width = 'w-full' }: Props) {
+export default function CustomButton({ label, variant, onPress, icon, width = 'w-full', loading = false }: Props) {
   const baseStyles = 'py-4 rounded-[15px] items-center justify-center mb-3';
   const customWhite = 'bg-white';
   const solidStyles = 'bg-[#FF6400]';
@@ -23,9 +24,10 @@ export default function CustomButton({ label, variant, onPress, icon, width = 'w
   const textStyle = tw`text-base font-semibold ${variant === 'solid' || variant === 'black' ? 'text-white' : variant === 'white' ? 'text-[#FF6400]' : 'text-black'}`;
 
   return (
-    <TouchableOpacity onPress={onPress} style={[buttonStyle, { cursor: "pointer" }]}>
-      {icon}
-      <Text style={textStyle}>{label}</Text>
+    <TouchableOpacity onPress={onPress} style={[buttonStyle, { cursor: "pointer" }]} disabled={loading}>
+      {loading ? (<ActivityIndicator />) : (<>{icon}
+        <Text style={textStyle}>{label}</Text></>)}
+
     </TouchableOpacity>
   );
 }

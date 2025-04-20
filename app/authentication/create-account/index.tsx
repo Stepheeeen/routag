@@ -13,6 +13,8 @@ import UploadDocumentInput from '~/components/UploadFile';
 import FullPageModalLayout from '~/layout/FullPageModalLayout';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Drivers, Vehicles } from '~/db/register';
+import { postRequest } from '~/api/requests/postRequest';
+import Toast from '~/components/Toast';
 
 export const SelectionCard = ({ title, description, icon, handleClick }: { title: string; description: string; icon: any; handleClick: () => void }) => {
   return (
@@ -30,12 +32,15 @@ export const SelectionCard = ({ title, description, icon, handleClick }: { title
 
 export default function SignUpScreen() {
   const [role, setRole] = useState<'sender' | 'individualCourier' | 'businessCourier' | ''>("")
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' as 'success' | 'error' });
   const [vehicleStep, setVehicleStep] = useState(0);
   const [driverStep, setDriverStep] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
   const [numberOfVehicles, setNumberOfVehicles] = useState(0);
   const [numberOfDrivers, setNumberOfDrivers] = useState(0);
   const [ConfirmPassword, setConfirmPassword] = useState('');
@@ -51,6 +56,44 @@ export default function SignUpScreen() {
   const closeModal = () => setModalVisible(false);
   const openModal = () => setModalVisible(true);
 
+  const [showToast, setShowToast] = useState(false);
+  const [toastType, setToastType] = useState<'success' | 'error'>('success')
+  const [toastMessage, setToastMessage] = useState('')
+
+  const handleSenderCreateAccount = async () => {
+    if (!name || !email || !password || !phone) {
+      setToastType('error');
+      setToastMessage("Please fill all required fields");
+      setShowToast(true);
+
+      // Reset toast state after a delay
+      setTimeout(() => setShowToast(false), 3000);
+    } else {
+      setLoading(true);
+      try {
+        const response = await postRequest.registerCustomer(name, email, password, phone);
+        console.log(response.data);
+
+        setToastType('success');
+        setToastMessage(response.data.message);
+        setShowToast(true);
+
+        // Reset toast state after a delay
+        setTimeout(() => setShowToast(false), 3000);
+
+        router.push('/authentication/verification')
+      } catch (error: any) {
+        setToastType('error');
+        setToastMessage(error.response?.data?.message || "An error occurred");
+        setShowToast(true);
+
+        // Reset toast state after a delay
+        setTimeout(() => setShowToast(false), 3000);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
 
   return (
     <LayoutPage>
@@ -92,9 +135,9 @@ export default function SignUpScreen() {
 
             <View style={tw`my-4`}>
               <InputField label="Full Name" placeholder="Enter Full Name" value={name} onChangeText={setName} />
-              <InputField label="Phone Number" placeholder="Enter Phone Number" value={password} onChangeText={setPassword} />
+              <InputField label="Phone Number" placeholder="Enter Phone Number" value={phone} onChangeText={setPhone} />
               <InputField label="Email" placeholder="Enter Email" value={email} onChangeText={setEmail} />
-              <InputField label="Create Password" placeholder="Password" value={ConfirmPassword} onChangeText={setConfirmPassword} secureTextEntry />
+              <InputField label="Create Password" placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
 
               <Text style={tw`mb-4 items-center`}>
                 By clicking sign up you’re agreeing with out{" "}
@@ -102,11 +145,11 @@ export default function SignUpScreen() {
               </Text>
             </View>
 
-            <CustomButton label='Sign Up' onPress={() => router.push("/authentication/verification")} variant='solid' />
+            <CustomButton label='Sign Up' onPress={() => handleSenderCreateAccount()} variant='solid' loading={loading} />
 
             <View style={tw`flex-row justify-center`}>
               <Text style={tw`text-[#100F0D]`}>Already have an account?</Text>
-              <Link href="/authentication/create-account" style={tw`text-[#FF6400] ml-1`}>
+              <Link href="/authentication/login" style={tw`text-[#FF6400] ml-1`}>
                 Sign in
               </Link>
             </View>
@@ -303,7 +346,13 @@ export default function SignUpScreen() {
         ) : ('')
       }
 
-
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          type={toastType}
+          duration={3000}
+        />
+      )}
     </LayoutPage>
   );
 }

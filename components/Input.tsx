@@ -16,9 +16,18 @@ type Props = {
 
 export default function InputField({ label, placeholder, icon, secureTextEntry = false, value, onChangeText, background }: Props) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(!secureTextEntry);
+  const [isError, setIsError] = useState(false);
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prev) => !prev);
+  };
+
+  const handleBlur = () => {
+    if (!value || value.trim() === "") {
+      setIsError(true);
+    } else {
+      setIsError(false);
+    }
   };
 
   return (
@@ -28,15 +37,24 @@ export default function InputField({ label, placeholder, icon, secureTextEntry =
           {label}
         </Text>
       )}
-      <View style={tw`flex-row items-center rounded-xl px-4 py-3 ${background || `bg-white`}`}>
+      <View
+        style={tw`flex-row items-center rounded-xl px-4 py-3 ${background || `bg-white`} ${
+          isError ? "border border-red-500" : ""
+        }`}
+      >
         {icon && <Feather name={icon} size={20} color="#999" />}
         <TextInput
-          style={tw`ml-2 flex-1 mb-2 text-[17px]`}
+          style={tw`ml-2 flex-1 py-1 text-[17px]`}
           placeholder={placeholder}
           placeholderTextColor={"#9E9392"}
           secureTextEntry={!isPasswordVisible}
           value={value}
-          onChangeText={onChangeText}
+          onChangeText={(text) => {
+            if (onChangeText) {
+              onChangeText(text);
+            }
+          }}
+          onBlur={handleBlur}
         />
         {secureTextEntry && (
           <TouchableOpacity onPress={togglePasswordVisibility}>
@@ -48,6 +66,11 @@ export default function InputField({ label, placeholder, icon, secureTextEntry =
           </TouchableOpacity>
         )}
       </View>
+      {isError && (
+        <Text style={tw`text-red-500 text-[14px] mt-1`}>
+          This field is required.
+        </Text>
+      )}
     </View>
   );
 }
