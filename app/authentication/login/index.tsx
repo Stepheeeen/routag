@@ -9,6 +9,7 @@ import LayoutPage from '~/layout/PageLayout';
 import { AppleLogo, Facebook, FaceIDIcon, GoogleLogo, RouttagLogo } from '~/assets/svgs';
 import { postRequest } from '~/api/requests/postRequest';
 import Toast from '~/components/Toast';
+import { passRoute } from '~/utils/authentication.flow';
 
 export default function SignInScreen() {
   const [email, setEmail] = useState('');
@@ -30,8 +31,6 @@ export default function SignInScreen() {
       setLoading(true);
       try {
         const response = await postRequest.login(email, password);
-        console.log(response.data);
-
         setToastType('success');
         setToastMessage(response.data.message);
         setShowToast(true);
@@ -42,7 +41,7 @@ export default function SignInScreen() {
         router.push("/sender/tabs/Home")
       } catch (error: any) {
         setToastType('error');
-        setToastMessage(error.response?.data?.message || "An error occurred");
+        setToastMessage(error.response?.data?.message || 'An error occurred');
         setShowToast(true);
 
         // Reset toast state after a delay

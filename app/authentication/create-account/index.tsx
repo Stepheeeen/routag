@@ -15,6 +15,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { Drivers, Vehicles } from '~/db/register';
 import { postRequest } from '~/api/requests/postRequest';
 import Toast from '~/components/Toast';
+import { passRoute, UserAuthentication } from '~/utils/authentication.flow';
 
 export const SelectionCard = ({ title, description, icon, handleClick }: { title: string; description: string; icon: any; handleClick: () => void }) => {
   return (
@@ -80,6 +81,8 @@ export default function SignUpScreen() {
 
         // Reset toast state after a delay
         setTimeout(() => setShowToast(false), 3000);
+        UserAuthentication.email = email;
+        passRoute.url = '/sender/tabs/Home'
 
         router.push('/authentication/verification')
       } catch (error: any) {
@@ -121,7 +124,7 @@ export default function SignUpScreen() {
 
         <View style={tw`flex-row justify-center`}>
           <Text style={tw`text-[#100F0D]`}>Already have an account?</Text>
-          <Link href="/authentication/create-account" style={tw`text-[#FF6400] ml-1`}>
+          <Link href="/authentication/login" style={tw`text-[#FF6400] ml-1`}>
             Sign in
           </Link>
         </View>
