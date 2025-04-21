@@ -11,7 +11,7 @@ import Toast from '~/components/Toast';
 
 export default function VerificationScreen() {
     const [email, setEmail] = useState(UserAuthentication.email)
-    const [code, setCode] = useState(['', '', '', '', '']);
+    const [code, setCode] = useState(['', '', '', '', '', '']);
     const [timer, setTimer] = useState(120); // 2 minutes
 
 
@@ -55,8 +55,10 @@ export default function VerificationScreen() {
             // Reset toast state after a delay
             setTimeout(() => setShowToast(false), 3000);
         } finally {
-            setCode(['', '', '', '', '']);
+            setCode(['', '', '', '', '', '']);
             setLoading(false);
+            passRoute.url = ''
+            UserAuthentication.email = ''
         }
     }
 
@@ -86,7 +88,7 @@ export default function VerificationScreen() {
 
     return (
         <LayoutPage>
-            <View style={tw`p-6`}>
+            <View style={tw`p-3`}>
                 <Text style={tw`text-xl font-bold mb-2`}>OTP Verification</Text>
                 <Text style={tw`text-gray-500 mb-5`}>
                     OTP as been sent to <Text style={tw`font-bold`}>{email}</Text>

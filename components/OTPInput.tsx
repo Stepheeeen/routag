@@ -67,7 +67,7 @@ export default function OTPInput({ code, setCode, onComplete }: OTPInputProps) {
           keyboardType="number-pad"
           returnKeyType="done"
           editable={!loading}
-          style={tw`w-13 h-13 bg-[#FFDCD7] rounded-xl text-xl text-center`}
+          style={tw`w-12 h-13 bg-[#FFDCD7] rounded-xl text-xl text-center`}
         />
       ))}
       {loading && (
