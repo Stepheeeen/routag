@@ -83,7 +83,7 @@ export default function SignUpScreen() {
         UserAuthentication.email = email;
         passRoute.url = '/sender/tabs/Home'
 
-        setTimeout(() => router.push('/authentication/verification'), 5000)
+        setTimeout(() => router.push('/authentication/verification'), 4000)
 
       } catch (error: any) {
         setToastType('error');
