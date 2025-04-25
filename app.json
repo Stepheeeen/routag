@@ -64,6 +64,12 @@
         "projectId": "5f2d1df0-fd50-428b-a7cf-9f13912497a3"
       }
     },
-    "owner": "vastracktech"
+    "owner": "vastracktech",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5f2d1df0-fd50-428b-a7cf-9f13912497a3"
+    }
   }
 }
