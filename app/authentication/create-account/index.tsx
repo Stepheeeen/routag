@@ -75,12 +75,14 @@ export default function SignUpScreen() {
         const response = await postRequest.registerCustomer(name, email, password, phone);
         console.log(response.data);
 
+        setToastType('success')
         setToastMessage(response.data.message);
         setShowToast(true);
 
         // Reset toast state after a delay
         setTimeout(() => setShowToast(false), 3000);
         UserAuthentication.email = email;
+        UserAuthentication.code = response.data.otp
         passRoute.url = '/sender/tabs/Home'
 
         setTimeout(() => router.push('/authentication/verification'), 4000)

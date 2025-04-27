@@ -38,6 +38,7 @@ export default function SignInScreen() {
         // Reset toast state after a delay
         setTimeout(() => setShowToast(false), 3000);
         UserAuthentication.email = email;
+        UserAuthentication.code = response.data.otp;
         passRoute.url = '/sender/tabs/Home'
         router.push('/authentication/verification')
 
@@ -64,7 +65,7 @@ export default function SignInScreen() {
           <InputField label="Email Address" placeholder="example@you.com" value={email} onChangeText={setEmail} />
         </View>
 
-        <CustomButton label='Send OTP' onPress={() => handleForgotPassword()} variant='solid' />
+        <CustomButton label='Send OTP' onPress={() => handleForgotPassword()} variant='solid' loading={loading} />
       </View>
 
       {showToast && (
