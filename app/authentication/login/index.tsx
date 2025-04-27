@@ -38,7 +38,7 @@ export default function SignInScreen() {
         // Reset toast state after a delay
         setTimeout(() => setShowToast(false), 3000);
 
-        router.push("/sender/tabs/Home")
+        setTimeout(() => router.push("/sender/tabs/Home"), 2500)
       } catch (error: any) {
         setToastType('error');
         setToastMessage(error.response?.data?.message || 'An error occurred');

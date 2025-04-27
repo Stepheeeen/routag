@@ -73,7 +73,7 @@ export default function SignUpScreen() {
       setLoading(true);
       try {
         const response = await postRequest.registerCustomer(name, email, password, phone);
-        console.log(response.data);
+        // console.log(response.data);
 
         setToastType('success')
         setToastMessage(response.data.message);
